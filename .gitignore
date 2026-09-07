@@ -8,3 +8,11 @@ build/
 .venv/
 .test-artifacts/
 margin-mirage-case/
+my-case/
+generated-cases/
+.datamystery/
+.env
+.env.*
+!.env.example
+.DS_Store
+Thumbs.db
