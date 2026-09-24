@@ -4,7 +4,7 @@ Data Mystery is an early prototype with one scenario. Focused bug reports and in
 
 ## Play-test feedback
 
-Investigate a fresh case before reading the scenario code or tests, which contain spoilers. Include the seed and code revision with feedback. Describe where the briefing or schema was unclear, which claims you could support from the CSVs, and whether the revealed explanation matched your evidence. Mark solution details as spoilers in issue titles or use a collapsed details section in the issue body.
+Investigate a fresh case before reading the scenario code or tests, which contain spoilers. Follow the README's player-file handoff instructions when sharing a case. Include the seed and code revision with feedback. Describe where the briefing or schema was unclear, which claims you could support from the CSVs, and whether the revealed explanation matched your evidence. Keep issue titles free of solution details; put spoilers in a collapsed details section in the issue body.
 
 ## Local development
 

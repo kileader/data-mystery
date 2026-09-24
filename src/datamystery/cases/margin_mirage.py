@@ -9,11 +9,11 @@ def build_spec() -> CaseSpec:
         case_type="profit_decline",
         difficulty="medium",
         briefing=(
-            "Northstar Market, a mid-sized online retailer, had its weakest quarterly "
-            "operating result in company history during Q2 2026. This surprised leadership: "
-            "orders accelerated and recognized merchandise revenue remained healthy. The COO "
-            "blames a March carrier price increase. Marketing points to the April CREATOR20 "
-            "campaign as evidence that its spending worked. Determine what principally damaged "
+            "Northstar Market, a mid-sized online retailer, reported deteriorating contribution "
+            "during Q2 2026 despite healthy merchandise revenue. The COO "
+            "blames a March carrier price increase. Marketing points to its April campaign "
+            "promoting the existing CREATOR20 code as evidence that its spending worked. "
+            "Determine what principally damaged "
             "unit economics, when it began, which part of the business was most affected, and "
             "whether shipping is a sufficient explanation. Quantify your claims."
         ),

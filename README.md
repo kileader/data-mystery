@@ -71,12 +71,27 @@ my-case/
 
 Generated cases are local working artifacts. The documented output folders and hidden answer folders are excluded from Git; use `generated-cases/` for additional local runs.
 
+## Share a case for an independent play-test
+
+Give the player `briefing.md`, `schema.md`, `manifest.json`, `data/`, and a copy of [docs/investigating.md](docs/investigating.md). Keep `.datamystery/` and the repository source with the organizer. A dot-prefixed folder is not reliably hidden in Windows or editors; explicitly exclude it from the handoff.
+
+For example, after generating `my-case`, run this from the repository root in PowerShell. Use a fresh destination for each handoff:
+
+```powershell
+New-Item -ItemType Directory -Path generated-cases/player-copy -ErrorAction Stop
+Copy-Item my-case/briefing.md,my-case/schema.md,my-case/manifest.json generated-cases/player-copy/
+Copy-Item my-case/data generated-cases/player-copy/data -Recurse
+Copy-Item docs/investigating.md generated-cases/player-copy/investigating.md
+```
+
+Share only `generated-cases/player-copy/`. The player can use any analysis tool and needs no package installation. Keep the full original case and record `git rev-parse HEAD` alongside it (also note any uncommitted changes). After the player submits their findings, run `python -m datamystery reveal my-case` yourself and share the solution. The player-only copy deliberately has no reveal material.
+
 ## Scope and limitations
 
 - This is a practice dataset generator, not a completed independent analysis or a model trained on real business data.
 - The financial measure is contribution after product cost, shipping, and refunds. It excludes overhead and, by default, marketing spend; it is not operating profit.
 - The data supports diagnosing patterns in transactions. The authored narrative contains background events that the CSV files alone cannot prove.
-- The answer key uses known scenario dates and segments. It checks expected evidence; it does not independently discover causes or grade your submission.
+- The answer key uses known scenario dates and segments to summarize evidence; it does not independently discover causes or grade your submission. Evidence thresholds are enforced by the tests for the reference seed, not during every generation run.
 - Tests verify repeatability, selected relationships and arithmetic, and evidence thresholds for the reference seed. They do not establish correctness for every seed or custom scenario configuration.
 - Reproduce a case using the same seed and code revision, retaining the manifest to check CSV hashes. A seed alone is not a promise of identical output across future generator changes.
 

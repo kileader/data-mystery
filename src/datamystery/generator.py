@@ -342,7 +342,7 @@ Document assumptions and limitations. All monetary fields are USD. Do not inspec
 def _schema_markdown() -> str:
     return """# Data dictionary
 
-Each CSV is at the grain described below. IDs are stable within this generated case.
+Each CSV is at the grain described below. IDs are stable within this generated case. All monetary fields are USD and all dates are ISO-8601 calendar dates. Rows and IDs are not ordered chronologically; use the date columns for time comparisons.
 
 ## `customers.csv`
 
@@ -370,11 +370,11 @@ One row per order. `shipping_cost` is the amount paid by the retailer, not custo
 
 ## `refunds.csv`
 
-One row per refunded order. `refund_amount` reduces recognized economics for this exercise. Orders absent from this table had no refund in the observation window.
+One row per refunded order. `refund_amount` reduces contribution for this exercise and has not already been subtracted from item `net_revenue`. These records cover refunds associated with the supplied January-June orders, including refunds dated after June 30. Orders absent from this table have no recorded refund in this dataset. No inventory recovery or reversal of product cost is modeled.
 
 ## `marketing_daily.csv`
 
-One row per date and active marketing channel. Spend is not allocated to individual orders. `campaign_name` is the internal label supplied by marketing.
+One row per date and reported paid marketing channel. Organic orders have no corresponding spend row. Spend is not allocated to individual orders. `campaign_name` is the internal label supplied by marketing; a campaign launch does not necessarily mark the first availability of a coupon code.
 
 ## Suggested financial measure
 
@@ -382,7 +382,9 @@ A useful first-pass contribution measure is:
 
 `net revenue - product cost - shipping cost - refund amount`
 
-Marketing spend is deliberately separate; state clearly whether and how you incorporate it.
+Aggregate order items and coupon redemptions separately to one row per order before joining them, so multiple detail rows do not multiply financial amounts. Join customers on `customer_id`, products on `product_id`, and order-related tables on `order_id`. Use a left join for optional refunds and treat an absent refund as zero. Item net revenue already includes discounts; do not subtract coupon amounts again.
+
+Contribution excludes overhead and marketing spend, so it is not operating profit. Marketing spend is deliberately separate; state clearly whether and how you incorporate it. The answer key divides contribution by gross sales for its margin rate and attributes refunds to the original order date. Other definitions are possible, but state your denominator and date basis when comparing results.
 """
 
 
